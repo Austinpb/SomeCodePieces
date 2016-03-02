@@ -1,0 +1,6 @@
+(defun askem (string)
+    (format t "~A~%" string)
+    (format t "~A" (read))
+    (read)
+    )
+(askem "How do you do")
