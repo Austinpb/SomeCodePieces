@@ -1,0 +1,5 @@
+(setf path (make-pathname :name "hahaha"))
+(with-open-file (str path :direction :input)
+(terpri str)
+(close str)
+)
