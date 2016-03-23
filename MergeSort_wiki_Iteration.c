@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 int min(int x, int y) {
 	return x < y ? x : y;
 }
@@ -29,4 +31,13 @@ void merge_sort(int arr[], int len) {
 		b = a;
 	}
 	free(b);
+}
+int main(){
+    int abc[10] = {5,3,6,7,2,1,9,10,4,8};
+    merge_sort(abc, 10);
+    int i;
+    for ( i = 0; i < 10; i++) {
+        printf("%d\n",abc[i] );
+    }
+    return 0;
 }

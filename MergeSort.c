@@ -1,17 +1,17 @@
 #include<stdio.h>
 int main(int argc, char const *argv[]) {
-    int a[] = {1,2,3};
-    int b[] = {5,3,4,3};
-    int longth = (sizeof(a)/sizeof(a[0])) + (sizeof(b)/(sizeof(b[0])));
+
     return 0;
 }
-void MergeSort(int nums[], int lef, int righ, int mid){
-    int length = sizeof(nums)/sizeof(nums[0]);
-    int numss[length];
-    int i,l,r;
-    for (i = 1; i < (,length + 1); i++) {
-        for (size_t i = 0; i < count; i++) {
-            /* code */
+int min(int a, int b){
+    return (x < y ? x : y);
+}
+void MergeSort(int nums[], int len){
+    int* a = nums;
+    int mark, Jump;
+    for (mark = 1; mark < len; mark += mark) {
+        for (jump = 0 ; jump < len ; jump += mark + mark) {
+
         }
     }
 
