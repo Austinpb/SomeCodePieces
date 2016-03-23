@@ -11,9 +11,9 @@ void MergeSort(int nums[], int len){
     int mark, Jump;
     for (mark = 1; mark < len; mark += mark) {
         for (jump = 0 ; jump < len ; jump += mark + mark) {
-
+            int low = start
         }
-    }
+    }k
 
 
 
