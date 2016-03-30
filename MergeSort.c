@@ -1,55 +1,42 @@
 #include<stdio.h>
-int main(int argc, char const *argv[]) {
-
-    return 0;
-}
-int min(int a, int b){
+#include<stdlib.h>
+int min(int x, int y){
     return (x < y ? x : y);
 }
 void MergeSort(int nums[], int len){
     int* a = nums;
-    int mark, Jump;
-    for (mark = 1; mark < len; mark += mark) {
-        for (jump = 0 ; jump < len ; jump += mark + mark) {
-            int low = start
+    int* b = (int*)malloc(len * sizeof(int*));
+    int far, start;
+    for (far = 1; far < len; far += far) {
+        for (start = 0 ; start < len ; start += far + far) {
+            int low = start, mid = min(start + far, len), high = min(start + far + far ,len);
+            int k = low;
+            int start1 = low ,end1 = mid,start2 = mid ,end2 = high;
+            while (start1 < end1 && start2 < end2)
+                b[k++] = a[start1] < a[start2] ? a[start1++] : a[start2++];
+            while (start1 < end1)
+                b[k++] = a[start1++];
+            while (start2 < end2)
+                b[k++] = a[start2++];
         }
-    }k
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 分两堆
-    int mid = length/2;
-    // 对左一堆MergeSort
-    int left[] = MergeSort left mid
-    // 对右一堆MergeSort
-    int right[] = MergeSort mid right
-    // 合并
-
-    for (i = 0,l = 0, r = 0; i < length; i++) {
-        if (left[l] <= right[r]) {
-            nums[i] = left[l];
-            l++;
-        }
-        else {
-            nums[i] = right[r];
-            r++;
-        }
+        int* temp = a;
+        a = b;
+        b = temp;
     }
-
-    return nums;
+    if (a != nums){
+        int i;
+        for (i = 0; i < len ; i++)
+            b[i] = a[i];
+            b = a;
+    }
+    free(b);
 }
-void MergeSortOperation(int arr[], int start, int end){
-    int
+int main(){
+    int abc[10] = {5,3,6,7,2,1,9,10,4,8};
+    MergeSort(abc, 10);
+    int i;
+    for ( i = 0; i < 10; i++) {
+        printf("%d\n",abc[i] );
+    }
+    return 0;
 }
