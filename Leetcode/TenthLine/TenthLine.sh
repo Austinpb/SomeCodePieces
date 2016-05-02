@@ -1,1 +1,2 @@
-cat file.txt || awk 
+string={cat file.txt}
+echo $string

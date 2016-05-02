@@ -13,14 +13,17 @@ int main(int argc, char const *argv[]) {
     }
     printf("%d\n",x[2] );
 */
-    char charrr[] = "hahaha";
-    int i;
-    // i = sizeof(charrr)/sizeof(char);
+    char charrr[] = "hahahahahahaha";
+    int i,j;
+    char* a;
+    printf("%d\n",sizeof(a) );
+     i = sizeof(charrr);
+     j=sizeof(charrr[0]);
     // charrr[6] = 'b';
     // charrr[7] = 'c';
     1==1? charrr[2] = 'b':1;
     ac = 123;
     aaa();
-    printf("%s  %d\n",charrr , ac );
+    printf("%d  %d\n" , i,j );
     return 0;
 }
