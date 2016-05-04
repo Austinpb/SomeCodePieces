@@ -3,6 +3,8 @@
 #include<string>
 #include<iostream>
 #include <fstream>
+#include<curses.h>
+#include<ncurses.h>
 using namespace std;
 
 bool accept(){
@@ -57,6 +59,11 @@ int main(){
     fstream file;
     file.open("File",ios::in|ios::out);
     file << "asdflkajsdf;o";
+    initscr();
+    box(stdscr, ACS_VLINE, ACS_HLINE); /*draw a box*/
+    move(LINES/2, COLS/2); /*move the cursor to the center*/
+    waddstr(stdscr, "Hello, world!");
+    refresh();
 
     return 0;
 }
