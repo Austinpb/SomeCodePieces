@@ -72,14 +72,12 @@ class Daily: public item{
 };
 class System{
     void login(){
-        int temp
-        std::cout << "Username: " << std::endl;
-        cin >> temp
-        if (/* condition */) {
-            /* code */
-        }
-        std::cout << "Password: " << std::endl;
-        cin >>
+		string userName;
+		std::cout << "Username: " << std::endl;
+		std::cin >> userName;
+		string password;
+		std::cout << "Password: " << std::endl;
+		std::cin >> password;
     }
     void logout(){
 
@@ -90,6 +88,10 @@ class admin{
 };
 int main(){
 	//读文件，读取用户格式
+
+	System systemOnline;
+	systemOnline.login();
+
 	while (true) {
 		//cin 登录
 
