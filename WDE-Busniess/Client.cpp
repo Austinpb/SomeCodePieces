@@ -10,13 +10,8 @@ class User{
 	string userName;
 	string password;
 	double balance;
+    bool onlinestatus;
 
-    void login(){
-
-    }
-    void logout(){
-
-    }
     // 查看用户个人信息
     void viewaccount(){
 
@@ -27,6 +22,7 @@ class User{
 
 };
 
+
 class Buyer: public User {
     void recharge(double money){
         balance += money
@@ -35,7 +31,7 @@ class Buyer: public User {
 
     }
 };
-class member : public Buyer{
+class Member : public Buyer{
     int level;
     int token;
     //代币与现金1:1兑换
@@ -51,11 +47,7 @@ class Seller: public User {
     void
 };
 
-class System(){
-    onlineUsers;
-};
-
-class item{
+class Item{
 	int id;
 	string name;
 	int amount;
@@ -67,22 +59,40 @@ class item{
 	discountDate;
 };
 
-class food: public item{
+class Food: public item{
 	string taste;
 };
 
-class electronics: public item{
+class Electronics: public item{
 	string type;
 };
 
-class daily: public item{
+class Daily: public item{
 	string Brand;
 };
+class System{
+    void login(){
+        int temp
+        std::cout << "Username: " << std::endl;
+        cin >> temp
+        if (/* condition */) {
+            /* code */
+        }
+        std::cout << "Password: " << std::endl;
+        cin >>
+    }
+    void logout(){
 
+    }
+};
+class admin{
+
+};
 int main(){
 	//读文件，读取用户格式
 	while (true) {
 		//cin 登录
+
 		//cin 决定操作
 	}
 	return 0;

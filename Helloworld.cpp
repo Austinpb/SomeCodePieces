@@ -43,6 +43,44 @@ class Book {
 
 };
 
+class Line
+{
+   public:
+      void setLength( double len );
+      double getLength( void );
+      Line();  // 这是构造函数
+
+   private:
+      double length;
+};
+
+// 成员函数定义，包括构造函数
+Line::Line(void)
+{
+    cout << "Object is being created" << endl;
+}
+
+void Line::setLength( double len )
+{
+    length = len;
+}
+
+double Line::getLength( void )
+{
+    return length;
+}
+// 程序的主函数
+int main( )
+{
+   Line line;
+
+   // 设置长度
+   line.setLength(6.0);
+   cout << "Length of line : " << line.getLength() <<endl;
+
+   return 0;
+}
+/*
 int main(){
     cout << "test\n";
     int acb = 123;
@@ -60,10 +98,11 @@ int main(){
     file.open("File",ios::in|ios::out);
     file << "asdflkajsdf;o";
     initscr();
-    box(stdscr, ACS_VLINE, ACS_HLINE); /*draw a box*/
-    move(LINES/2, COLS/2); /*move the cursor to the center*/
+    box(stdscr, ACS_VLINE, ACS_HLINE);
+    move(LINES/2, COLS/2);
     waddstr(stdscr, "Hello, world!");
     refresh();
 
     return 0;
 }
+*/
