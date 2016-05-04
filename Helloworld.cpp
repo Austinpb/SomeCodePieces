@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include<string>
+#include<iostream>
+#include <fstream>
 using namespace std;
 
 bool accept(){
@@ -42,11 +44,6 @@ class Book {
 int main(){
     cout << "test\n";
     int acb = 123;
-    // std::cout << "tset" << "Biu biu biu";
-
-    // if(accept()){
-        // printf("asdfasdfasdf\n" );
-// /    }
     string str1 = "Hi";
     string str2 = "You";
     string str3;
@@ -57,5 +54,9 @@ int main(){
     book1.breadth = 20;
     book1.height = 40;
     cout << book1.getVolume() <<std::endl;
+    fstream file;
+    file.open("File",ios::in|ios::out);
+    file << "asdflkajsdf;o";
+
     return 0;
 }
