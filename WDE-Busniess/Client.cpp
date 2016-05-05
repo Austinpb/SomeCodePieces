@@ -1,101 +1,92 @@
-#include<string>
-#include<iostream>
-#include<fstream>
-#include<vector>
-void fail(){
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
+void fail() { std::cout << "Error!" << std::endl; }
+class User {
+  int id;
 
-}
-class User{
-	int id;
-	string userName;
-	string password;
-	double balance;
-    bool onlinestatus;
+public:
+  std::string userName;
+  std::string password;
+  double balance;
+  bool onlinestatus;
 
-    // 查看用户个人信息
-    void viewaccount(){
+  bool checkAccount(int number) {}
 
-    }
-    void viewitems(){
-
-    }
-
+  // 查看用户个人信息
+  void viewaccount() {}
+  void viewitems() {}
+  void login() {
+    std::string userName;
+    std::cout << "Username: " << std::endl;
+    std::cin >> userName;
+    std::string password;
+    std::cout << "Password: " << std::endl;
+    std::cin >> password;
+  }
+  void logout() { std::cout << "Logout Success!" << std::endl; }
 };
 
+class Buyer : public User {
+  void recharge(double money) { balance += money; }
+  bool Buy(int item_id, int item_counts, int item_price){
 
-class Buyer: public User {
-    void recharge(double money){
-        balance += money
-    }
-    bool Buy(int item_id, int item_counts, int item_price){
-
-    }
-};
-class Member : public Buyer{
+  };
+  class Member : public Buyer {
     int level;
     int token;
     //代币与现金1:1兑换
-    void exchange(int exchangeNumber){
-        if (exchangeNumber < token) {
-            this.balance += exchangeNumber;
-            token -= exchangeNumber;
-        }
-        else fail();
+    void exchange(int exchangeNumber) {
+      if (exchangeNumber < token) {
+        this->balance += exchangeNumber;
+        token -= exchangeNumber;
+      } else
+        fail();
     }
-}
-class Seller: public User {
-    void
-};
+  };
+  class Seller : public User {
+    list ownItems;
+    void addItems;
+    void checkItems;
+  };
 
-class Item{
-	int id;
-	string name;
-	int amount;
-	double price;
-	string owner;
-	productionDate;
-	int shelfLife;
-	string discountReason;
-	discountDate;
-};
+  class Item {
+  public:
+    int id;
+    std::string name;
+    int amount;
+    double price;
+    std::string owner;
+    productionDate;
+    int shelfLife;
+    std::string discountReason;
+    discountDate;
+  };
 
-class Food: public item{
-	string taste;
-};
+  class Food : public Item {
+    std::string taste;
+  };
 
-class Electronics: public item{
-	string type;
-};
+  class Electronics : public Item {
+    std::string type;
+  };
 
-class Daily: public item{
-	string Brand;
-};
-class System{
-    void login(){
-		string userName;
-		std::cout << "Username: " << std::endl;
-		std::cin >> userName;
-		string password;
-		std::cout << "Password: " << std::endl;
-		std::cin >> password;
+  class Daily : public Item {
+    std::string Brand;
+  };
+  class System {};
+  class admin {};
+  int main() {
+    //读文件，读取用户格式
+
+    System systemOnline;
+    systemOnline.login();
+
+    while (true) {
+      // cin 登录
+
+      // cin 决定操作
     }
-    void logout(){
-
-    }
-};
-class admin{
-
-};
-int main(){
-	//读文件，读取用户格式
-
-	System systemOnline;
-	systemOnline.login();
-
-	while (true) {
-		//cin 登录
-
-		//cin 决定操作
-	}
-	return 0;
-}
+    return 0;
+  }
