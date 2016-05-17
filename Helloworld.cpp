@@ -73,8 +73,11 @@ int main( )
 {
    Line line;
 
-   line.setLength(6.0);
-   cout << "Length of line : " << line.getLength() <<endl;
+   // line.setLength(6.0);
+   // cout << "Length of line : " << line.getLength() <<endl;
+   std::cout << "asdfasdf" << std::endl;
+   std::cout << "BCZAB" << std::endl;
+   std::cout << "KALAB" << std::endl;
 
    return 0;
 }
