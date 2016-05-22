@@ -1,1 +1,11 @@
-asdflkajsdf;o
+Buyer
+00000 test password
+
+Member
+00001 test11 password
+Seller
+austin test asdf
+
+Item
+//id amount price owner productionDate
+#EOF
