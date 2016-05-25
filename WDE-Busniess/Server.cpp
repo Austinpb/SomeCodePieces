@@ -6,106 +6,86 @@
 #include <pthread.h>
 using namespace std;
 
-void fail() { std::cout << "Error!" << std::endl; }
 
-class User {
+void fail(int code){
+    std::cout << "Error! code: " << code << std::endl;
+    };
+class User{
 protected:
-  int id;
-  double balance;
-  std::string userName;
-  std::string password;
+    // int id;
+    double balance;
+    string userName;
+    string password;
 public:
-  bool onlineStatus;
-  bool checkAccount(string un, string pw){
-      ifstream checker;
-      checker.open("UserData.dat");
-      for (string s; s!="#EOF";) {
-        //   getline(checker, s);
-        checker >> s;
-        if(s == "#EOF") break;
-        if(s == "Buyer" || s == "Member" || s == "Seller") continue;
-        if (s == un){
-            checker >> s;
-            if (s == pw) return true;
+    bool checkAccount(string un, string pw){
+        ifstream checker;
+        checker.open("UserData");
+        for (string s; s!="#EOF";) {
+          //   getline(checker, s);
+          checker >> s;
+          if(s == "#EOF") break;
+          if(s == "Buyer" || s == "Member" || s == "Seller") continue;
+          if (s == un){
+              checker >> s;
+              if (s == pw) return true;
+          }
+          getline(checker, s);
         }
-        getline(checker, s);
-      }
-      checker.close();
-      return false;
-  };
-  virtual void viewAccount() = 0;
-  virtual void signUp() = 0;
-  virtual void logout() = 0;
-  void login() {
-    std::string userName;
-    std::cout << "Username: ";
-    std::cin >> userName;
-    std::string password;
-    std::cout << "Password: ";
-    std::cin >> password;
-    if(this-> checkAccount())cout << "Success!" << endl;
-    else cout << "try again" << endl;
-  };
+        checker.close();
+        return false;
+    };
+    void setUser(double bal,string un,string pw){
+        this -> balance = bal;
+        this -> userName = un;
+        this -> password = pw;
+    };
 };
-
-class Buyer : public User {
-protected:
-    int;
+class Buyer: public User{
 public:
-  void recharge(double money) { balance += money; }
-  bool Buy(int item_id, int item_counts, int item_price){};
-  void signUp(){
-      std::string userName;
-      std::cout << "Username: ";
-      std::cin >> userName;
-      checkAccount();
-      if
-      std::string password;
-      std::cout << "Password: ";
-      std::cin >> password;
-  }
-};
-
-class Member : public Buyer {
-private:
-    int level;
-    int token;
-public:
-
-  //代币与现金1:1兑换
-  void exchange(int exchangeNumber) {
-    if (exchangeNumber < token) {
-      this->balance += exchangeNumber;
-      token -= exchangeNumber;
+    Buyer(string un = NULL,string pw = NULL, double bal = 0){
+        this -> userName = un;
+        this -> password = pw;
+        this -> balance = bal;
+    };
+    void buy(){
+        cout << "Buy!!!" << endl;
     }
-    else
-      fail();
-  }
-};
 
-class Seller : public User {
-  map ownItems;
-  void addItems;
-  void checkItems;
+};
+/*
+class Member:public Buyer;
+*/
+class Seller:public User{
+
 };
 
 ////////////////////////////////////////
 
 class Sales_item {
 public:
-  int id;
-  std::string name;
-  std::string owner;
+  // int id;
+  string name;
+  string owner;
   int amount;
   double price;
-
-  int productionDate;
-  int shelfLife;
-  std::string discountReason;
-  int discountPeriod;
+  // int productionDate;
+  // int shelfLife;
+  // std::string discountReason;
+  // int discountPeriod;
 };
-
-class Food : public Sales_item {
+class Books : public Sales_item{
+public:
+    int ISBN;
+    // string author;
+    Books(string na,string ow,int am, double pris,int IS){
+        this -> name = na;
+        this -> owner = ow;
+        this -> amount = am;
+        this -> price = pris;
+        this -> ISBN = IS;
+    }
+};
+/*class Food : public Sales_item {
   std::string taste;
 };
 
@@ -116,29 +96,81 @@ class Electronics : public Sales_item {
 class DailyUse : public Sales_item {
   std::string Brand;
 };
-
+*/
 ////////////////////////////////////////
 
 class System {
-    map<key, value> userinfo;
-    map<key, value> iteminfo;
-    saveGame(){
-        //save userinfo
-        //save iteminfo
-    };
-    loadGame(){
+// private:
+public:
+    map<string, class Buyer> onlineBuyer;
+    map<string, class Seller> onlineSeller;
+    map<string, class Sales_item> onshelfItems;
+// public:
+    void startGame(){
+        printf("Loading...\n");
+        ifstream starter;
+        starter.open("UserData");
+        for (string s ; s != "#EOF";) {
+            starter >> s;
+            printf("i can read!\n" );
+            cout << s << endl;
+            istream_iterator<string>file(starter);
+            if (s == "Buyer") {
+                string First = *file;
+                // std::cout << "Catch" << First << std::endl;
+                printf("sds\n");
+                Buyer Second(*file++,*file++,stod(*file++));
+                pair<string, class Buyer> oneBuyer(First, Second);
+                onlineBuyer.insert(oneBuyer);
+                // getline(starter,s);
+            }/*
+            else if(s == "Seller"){
+                string First = *file;
+                Seller Second(*file++,*file++,stod(*file++));
+                pair<string, class Seller> oneBuyer(First, Second);
+                onlineBuyer.insert(oneBuyer);
+            }*/
+        }
+        starter.close();/*
+        starter.open("ItemData");
+        for (string s ; s != "#EOF";) {
+            starter >> s;
+            if(s == "Books"){
+            pair<string, class Books> oneItems;
+            starter >> oneItems.first;
 
-    };
+            };
+        };
+        starter.close();*/
+    }
+    /*void loadGame(){
+
+    }
+
+    void saveGame(){
+        ifstream saver;
+        saver.open("UserData");
+        for (string s ; s != "#EOF";) {
+            saver >> s;
+        }
+        saver.close();
+        saver.open("ItemData");
+        saver.close();
+    }
+    */
 };
 ////////////////////////////////////////
 
 int main() {
   //读文件，读取用户格式
-
-
   while (true) {
     // cin 登录
-
+    int rounds = 0;
+    printf("Round %d\n",rounds);
+    System Star;
+    Star.startGame();
+    Buyer one = Star.onlineBuyer["austin"];
+    one.buy();
     // cin 决定操作
   }
   return 0;

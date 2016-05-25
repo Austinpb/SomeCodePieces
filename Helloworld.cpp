@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include <ncurses.h>
 #include <boost/algorithm/string.hpp>
+#include <cstdlib>
 
 using namespace std;
 #define NUM_THREADS 5
@@ -84,10 +85,36 @@ void Line::setLength( double len ){
 double Line::getLength( void ){
     return length;
 }
+class a{
+protected:
+    int aa;
+public:
+    void setaa(int vb){
+        this -> aa = vb;
+    }
+};
+class b:public a{
+public:
+    int bb;
+    b():bb(32){cout << "a" <<endl;}
+};
+class c:public b{
+public:
+    // c():aa(0),bb(0),cc(0){}
+    c(int aaa = 0,int bbb = 4,int ccc = 2){
+        this -> aa = aaa;
+        this -> bb = bbb;
+        this -> cc = ccc;
+    };
+    int cc;
+    int id;
+    double balance;
+    string userName;
+    string password;
+    int showaa(){return aa;};
+};
 int main( )
 {
-
-
    /*
    pthread_t tids[NUM_THREADS];
     for(int i = 0; i < NUM_THREADS; ++i)
@@ -133,13 +160,11 @@ int main( )
 
    return 0;
 
-   */
    // ifstream checker;
    // checker.open("File");
    // string s;
    if(checkAccount("austin","test"))cout << "abc" << endl;
    else cout << "error" << endl;
-   /*
    int i = 20;
    while (i>0) {
     //    getline(checker,s);
@@ -151,5 +176,44 @@ int main( )
     //    cout << s << endl;
        i--;
    }
+   c test;
+   vector<class c>biu;
+
+   test.cc = 1024;
+   test.setaa(2048);
+   test.bb = 3072;
+   biu.push_back(test);
+   vector<class c>::iterator iter = biu.begin();
+   cout << test.cc << ' ' << test.showaa() << ' ' << test.bb << endl;
+   cout << biu[0].cc << ' ' << biu[0].showaa() << ' ' << biu[0].bb << endl;
+   cout << iter->cc << ' ' << iter->showaa() << ' ' << iter->bb << endl;
+
+   // *oo = "BiuBiu";
+   // *oo = endl;
+   ifstream file;
+   file.open("File");
+   // file.open("File",ios::in|ios::out);
+   istream_iterator<string>oo(file);
+   string s = *oo;
+   // file >> s;
+   // string b = *oo;
+   string b;
+   file >> b;
+   double ccc = 1.1;
+   ccc = stod(b);
+   file.close();
+   cout << s<< ccc<< ' '<< b << endl;
    */
+   // void creatAccount
+   // vector<char> v;
+   // b aaa(9);
+   // cout << aaa.bb << endl;
+   // test(2,4,5);
+   // cout << test.showaa() << ' ' << test.bb << ' ' << test.cc << endl;
+   ifstream file;
+   file.open("UserDate");
+   for(string s;s != "#EOF";){
+       file >> s;
+       cout << s << endl;
+   }
 }
