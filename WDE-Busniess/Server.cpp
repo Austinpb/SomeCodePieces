@@ -114,8 +114,8 @@ class DailyUse : public Sales_item {
 class System {
 // private:
 public:
-    map<string, class Buyer> onlineBuyer;
-    map<string, class Seller> onlineSeller;
+    map<string, class Buyer> registeredBuyer;
+    map<string, class Seller> registeredSeller;
     map<string, class Sales_item> onshelfItems;
 // public:
     void startGame(){
@@ -131,7 +131,7 @@ public:
                 cout << "Yet Another Buyer:" << First << endl;
                 Buyer Second(*file++,*file++,stod(*file++));
                 pair<string, class Buyer> oneBuyer(First, Second);
-                onlineBuyer.insert(oneBuyer);
+                registeredBuyer.insert(oneBuyer);
             }
             else if(*file == "Seller"){
                 *file++;
@@ -139,7 +139,7 @@ public:
                 cout << "Yet Another Seller:" << First << endl;
                 Seller Second(*file++,*file++,stod(*file++));
                 pair<string, class Seller> oneSeller(First, Second);
-                onlineSeller.insert(oneSeller);
+                registeredSeller.insert(oneSeller);
             }
             else if(*file == "#EOF"){break;}
             else {
@@ -149,7 +149,7 @@ public:
                 cout << "Yeah" <<endl;
             }
         }
-        starter.close();/*
+        starter.close();
         starter.open("ItemData");
         for (string s ; s != "#EOF";) {
             starter >> s;
@@ -159,7 +159,7 @@ public:
 
             };
         };
-        starter.close();*/
+        starter.close();
         printf("Game is started!\n");
     }
     /*void loadGame(){
@@ -189,9 +189,10 @@ int main() {
     printf("Round %d\n",rounds);
     System Star;
     Star.startGame();
-    Buyer one = Star.onlineBuyer["austin"];
+    Buyer one = Star.registeredBuyer["austin"];
     one.evilWelcome();
     // cin 决定操作
+    cout << "Which item do you want check?";
     i++;
   }
   return 0;
