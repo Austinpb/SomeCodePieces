@@ -43,12 +43,14 @@ public:
 class Buyer: public User{
 public:
     Buyer(string un = NULL,string pw = NULL, double bal = 0){
-        this -> userName = un;
-        this -> password = pw;
-        this -> balance = bal;
+        userName = un;
+        password = pw;
+        balance = bal;
     };
-    void buy(){
-        cout << "Buy!!!" << endl;
+    void evilWelcome(){
+        cout << "Hello "<< userName << endl;
+        cout << "You have ";
+        printf("%.2f\n",balance );
     }
 
 };
@@ -56,7 +58,17 @@ public:
 class Member:public Buyer;
 */
 class Seller:public User{
-
+public:
+    Seller(string un = NULL,string pw = NULL, double bal = 0){
+        userName = un;
+        password = pw;
+        balance = bal;
+    };
+    void evilWelcome(){
+        cout << "Hello "<< userName << endl;
+        cout << "You have ";
+        printf("%.2f\n",balance );
+    }
 };
 
 ////////////////////////////////////////
@@ -110,26 +122,32 @@ public:
         printf("Loading...\n");
         ifstream starter;
         starter.open("UserData");
-        for (string s ; s != "#EOF";) {
-            starter >> s;
-            printf("i can read!\n" );
-            cout << s << endl;
-            istream_iterator<string>file(starter);
-            if (s == "Buyer") {
+        istream_iterator<string>file(starter);
+        for (string s;s != "#EOF";) {
+            cout << "Next Signal: " << *file << endl;
+            if (*file == "Buyer") {
+                *file++;
                 string First = *file;
-                // std::cout << "Catch" << First << std::endl;
-                printf("sds\n");
+                cout << "Yet Another Buyer:" << First << endl;
                 Buyer Second(*file++,*file++,stod(*file++));
                 pair<string, class Buyer> oneBuyer(First, Second);
                 onlineBuyer.insert(oneBuyer);
-                // getline(starter,s);
-            }/*
-            else if(s == "Seller"){
+            }
+            else if(*file == "Seller"){
+                *file++;
                 string First = *file;
+                cout << "Yet Another Seller:" << First << endl;
                 Seller Second(*file++,*file++,stod(*file++));
-                pair<string, class Seller> oneBuyer(First, Second);
-                onlineBuyer.insert(oneBuyer);
-            }*/
+                pair<string, class Seller> oneSeller(First, Second);
+                onlineSeller.insert(oneSeller);
+            }
+            else if(*file == "#EOF"){break;}
+            else {
+                getline(starter,s);
+                *file++;
+                s = *file;
+                cout << "Yeah" <<endl;
+            }
         }
         starter.close();/*
         starter.open("ItemData");
@@ -142,6 +160,7 @@ public:
             };
         };
         starter.close();*/
+        printf("Game is started!\n");
     }
     /*void loadGame(){
 
@@ -163,15 +182,17 @@ public:
 
 int main() {
   //读文件，读取用户格式
-  while (true) {
+  int i = 0;
+  while (i == 0) {
     // cin 登录
     int rounds = 0;
     printf("Round %d\n",rounds);
     System Star;
     Star.startGame();
     Buyer one = Star.onlineBuyer["austin"];
-    one.buy();
+    one.evilWelcome();
     // cin 决定操作
+    i++;
   }
   return 0;
 }
