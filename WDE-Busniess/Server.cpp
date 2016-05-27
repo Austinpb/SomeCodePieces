@@ -11,12 +11,13 @@ void fail(int code){
     std::cout << "Error! code: " << code << std::endl;
     };
 class User{
-protected:
+public:
+// protected:
     // int id;
     double balance;
     string userName;
     string password;
-public:
+// public:
     bool checkAccount(string un, string pw){
         ifstream checker;
         checker.open("UserData");
@@ -88,13 +89,15 @@ public:
 class Books : public Sales_item{
 public:
     int ISBN;
-    // string author;
-    Books(string na,string ow,int am, double pris,int IS){
-        this -> name = na;
-        this -> owner = ow;
-        this -> amount = am;
-        this -> price = pris;
-        this -> ISBN = IS;
+    string author;
+    string publisher;
+    Books(string na,string ow,int am, double pris,int IS,string pub){
+        name = na;
+        owner = ow;
+        amount = am;
+        price = pris;
+        ISBN = IS;
+        publisher = pub;
     }
 };
 /*class Food : public Sales_item {
@@ -115,7 +118,9 @@ class System {
 // private:
 public:
     map<string, class Buyer> registeredBuyer;
+    map<string, int>onlineBuyer;
     map<string, class Seller> registeredSeller;
+    map<string, int>onlineSeller;
     map<string, class Sales_item> onshelfItems;
 // public:
     void startGame(){
@@ -162,6 +167,126 @@ public:
         starter.close();
         printf("Game is started!\n");
     }
+    int checkAccount(string name,string word,int type){
+        // tpye == 1(buyer) 2(seller);
+        if (type == 1) {
+            map<string ,class Buyer>::iterator it = registeredBuyer.find(name);
+            if(it == registeredBuyer.end()){
+                return 1;
+            }
+            else {
+                if (it -> second.password == word){
+                    return 3;
+                }
+                else return 2;
+            }
+        }
+        else if (type == 2) {
+            map<string, class Seller>::iterator it = registeredSeller.find(name);
+            if(it == registeredSeller.end()){
+                return 1;
+            }
+            else{
+                if(it -> second.password == word){
+                    return 3;
+                }
+                else return 2;
+            }
+        }
+        // return 1;//无用户名
+        // return 2;//有用户名，密码不对
+        // return 3;//用户名与密码匹配
+    }
+    int signin(string name = "NULL",string word = "NULL" ,int type = 0){
+        if (name == "NULL" || word == "NULL" || type == 0){
+            cout << "username: ";
+            cin >> name;
+            cout << "password: ";
+            cin >> word;
+            cout << "Buyer or Seller:";
+            string Stype;
+            cin >> Stype;
+            if(Stype == "Buyer")type = 1;
+            else if(Stype == "Seller")type = 2;
+            else {
+                cout << "Excuse me? " << endl;
+                return 0;
+            }
+        }
+        int aUser = checkAccount(name, word,type);
+        if (aUser == 3){
+            if (type == 1){
+                if (onlineBuyer.find(name) == onlineBuyer.end()){
+                    pair<string, int>goonline;
+                    goonline.first = name;
+                    goonline.second = 1;
+                    onlineBuyer.insert(goonline);
+                    cout << "Sign in Success!" << endl;
+                    return 0;
+                }
+                else {
+                    cout << "Can't sign in!";
+                    return 1;
+                }
+            }
+            if (type == 2){
+                if (onlineSeller.find(name) == onlineSeller.end()){
+                    pair<string, int>goonline;
+                    goonline.first = name;
+                    goonline.second = 1;
+                    onlineSeller.insert(goonline);
+                    cout << "Sign in Success!" << endl;
+                    return 0;
+                }
+                else {
+                    cout << "Can't sign in!";
+                    return 1;
+                }
+            }
+            onlineBuyer.find(name);
+
+            pair<string, int>goonline;
+            goonline.first = name;
+            goonline.second = 1;
+
+        }
+        else if(aUser == 2){
+            cout << "Wrong Password! Try Again or Say \"No\": ";
+            string tryagain;
+            cin >> tryagain;
+            if (tryagain == "No"){
+
+            }
+        }
+        else if(aUser == 1){
+            cout << "You may want to sign up? Y/n";
+            string opi;
+            cin >> opi;
+            if (opi == "Y"){
+
+            }
+            else {
+                cout << "OK..." << endl;
+            }
+        };
+    }
+    int signup(string name = "NULL",string word = "NULL" ,int type = 0){
+        if (name == "NULL" || word == "NULL" || type == 0){
+            cout << "username: ";
+            cin >> name;
+            cout << "password: ";
+            cin >> word;
+            cout << "Buyer or Seller:";
+            string Stype;
+            cin >> Stype;
+            if(Stype == "Buyer")type = 1;
+            else if(Stype == "Seller")type = 2;
+            else {
+                cout << "excuse me? " << endl;
+                return 0;
+            }
+        }
+    }
     /*void loadGame(){
 
     }
@@ -193,6 +318,19 @@ int main() {
     one.evilWelcome();
     // cin 决定操作
     cout << "Which item do you want check?";
+
+
+
+
+
+
+
+
+
+
+
+
+
     i++;
   }
   return 0;

@@ -207,27 +207,35 @@ int main( )
  // b aaa(9);
    // cout << aaa.bb << endl;
    // test(2,4,5);
-   printf("Loading...\n");
-   ifstream file;
-   file.open("File");
-   istream_iterator<string>file_iter(file);
-   string s;
-   cout << *file_iter <<endl;
-   file >> s;
-   cout << "s拿出来的" << s<< endl;
-   getline(file,s);
-   cout << "拿走了 " << s << endl;
-   *file_iter++;
-   cout << *file_iter <<endl;
-   cout << "*file拿出来的" << *file_iter++ <<endl;
-   cout << *file_iter++ <<endl;
-   cout << *file_iter++ <<endl;
-
+    printf("Loading...\n");
+    ifstream file;
+    file.open("File1");
+    istream_iterator<string>file_iter(file);
+    cout << *file_iter++ << endl;
+    cout << *file_iter++ << endl;
+    cout << *file_iter << endl;
+    file.close();
+    file.open("File2");
+    new(&file_iter(file)) istream_iterator<string>;
+    cout << *file_iter++ << endl;
+    cout << *file_iter++ << endl;
+    cout << *file_iter++ << endl;
+    cout << *file_iter << endl;
+    // string s;
+    // cout << *file_iter << endl;
+    // file >> s;
+    // cout << "s拿出来的: " << s<< endl;
+    // getline(file,s);
+    // cout << "拿走了: " << s << endl;
+    // *file_iter++;
+    // cout << *file_iter <<endl;
+    // cout << "*file拿出来的" << *file_iter++ <<endl;
+    // cout << *file_iter++ <<endl;
+    // cout << *file_iter++ <<endl;
    // for(string s;s != "#EOF";){
    //     file >> s;
    //     cout << s << endl;
    // }
-   file.close();
    //
    // ifstream starter;
    // starter.open("UserDate");
