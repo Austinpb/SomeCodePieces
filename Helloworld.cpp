@@ -11,6 +11,20 @@
 using namespace std;
 #define NUM_THREADS 5
 
+void insertaLineinfile(string title,fstream file){
+    vector<string> v;
+    for(string s;s!="#EOF";){
+        getline(file,s);
+        v.push_back(s);
+    }
+    v.pop_back();
+    v.push_back(title);
+    v.push_back("#EOF");
+    for(vector<string>::iterator iter = v.begin();*iter != "#EOF";){
+        file << *iter++ <<endl;
+    }
+}
+
 // void * sayHi(void* args){
 //     cout << "1" << endl;
 //     cout << "2" << endl;
@@ -207,20 +221,20 @@ int main( )
  // b aaa(9);
    // cout << aaa.bb << endl;
    // test(2,4,5);
-    printf("Loading...\n");
-    ifstream file;
-    file.open("File1");
-    istream_iterator<string>file_iter(file);
-    cout << *file_iter++ << endl;
-    cout << *file_iter++ << endl;
-    cout << *file_iter << endl;
-    file.close();
-    file.open("File2");
-    new(&file_iter(file)) istream_iterator<string>;
-    cout << *file_iter++ << endl;
-    cout << *file_iter++ << endl;
-    cout << *file_iter++ << endl;
-    cout << *file_iter << endl;
+    // printf("Loading...\n");
+    // ifstream file;
+    // file.open("File1");
+    // istream_iterator<string>file_iter(file);
+    // cout << *file_iter++ << endl;
+    // cout << *file_iter++ << endl;
+    // cout << *file_iter << endl;
+    // file.close();
+    // file.open("File2");
+    // new(&file_iter(file)) istream_iterator<string>;
+    // cout << *file_iter++ << endl;
+    // cout << *file_iter++ << endl;
+    // cout << *file_iter++ << endl;
+    // cout << *file_iter << endl;
     // string s;
     // cout << *file_iter << endl;
     // file >> s;
@@ -252,4 +266,28 @@ int main( )
    // }
    // c test(1,6);
    // cout << test.showaa() << ' ' << test.bb << ' ' << test.cc << endl;
+   // string s = "Biu";
+   // string t = "soo";
+   // string r = "boo";
+   // string str;
+   // str = s + " " + t + " " + r;
+   // cout << str << endl;
+   fstream abc;
+   abc.open("File3",ios::app|ios::out);
+   string s = "abcde";
+   abc << s <<endl;
+   // insertaLineinfile(s, abc);
+   // abc.close();
+   vector<string> v;
+   for(string b;b!="#EOF";){
+       getline(abc,b);
+       v.push_back(b);
+   }
+   v.pop_back();
+   v.push_back(s);
+   v.push_back("#EOF");
+   for(vector<string>::iterator iter = v.begin();*iter != "#EOF";){
+       abc << *iter++ <<endl;
+   }
+   //
 }

@@ -7,6 +7,19 @@
 using namespace std;
 
 
+void insertaLineinfile(string title,fstream file){
+    vector<string> v;
+    for(string s;s!="#EOF";){
+        getline(file,s);
+        v.push_back(s);
+    }
+    v.pop_back();
+    v.push_back(title);
+    v.push_back("#EOF");
+    for(vector<string>::iterator iter = v.begin();*iter != "#EOF";){
+        file << *iter++ <<endl;
+    }
+}
 void fail(int code){
     std::cout << "Error! code: " << code << std::endl;
     };
@@ -159,7 +172,7 @@ public:
         for (string s ; s != "#EOF";) {
             starter >> s;
             if(s == "Books"){
-            pair<string, class Books> oneItems;
+            pair<string, class Books>oneItems;
             starter >> oneItems.first;
 
             };
@@ -169,6 +182,9 @@ public:
     }
     int checkAccount(string name,string word,int type){
         // tpye == 1(buyer) 2(seller);
+        // return 1;//无用户名
+        // return 2;//有用户名，密码不对
+        // return 3;//用户名与密码匹配
         if (type == 1) {
             map<string ,class Buyer>::iterator it = registeredBuyer.find(name);
             if(it == registeredBuyer.end()){
@@ -193,9 +209,6 @@ public:
                 else return 2;
             }
         }
-        // return 1;//无用户名
-        // return 2;//有用户名，密码不对
-        // return 3;//用户名与密码匹配
     }
     int signin(string name = "NULL",string word = "NULL" ,int type = 0){
         if (name == "NULL" || word == "NULL" || type == 0){
@@ -286,6 +299,28 @@ public:
                 return 0;
             }
         }
+        /*if (*file == "Buyer") {
+            *file++;
+            string First = *file;
+            cout << "Yet Another Buyer:" << First << endl;
+            Buyer Second(*file++,*file++,stod(*file++));
+
+            pair<string, class Buyer> oneBuyer(First, Second);
+
+            registeredBuyer.insert(oneBuyer);
+        }*/
+        if (type == 1){
+            Buyer Second(name,word,0);
+            pair<string,class Buyer>newBuyer(name, Second);
+            registeredBuyer.insert(newBuyer);
+
+        }
+        else if(type == 2){
+            Seller Second(name,word,0);
+            pair<string,class Seller>newSeller(name, Second);
+            registeredSeller.insert(newSeller);
+        }
+
     }
     /*void loadGame(){
 
